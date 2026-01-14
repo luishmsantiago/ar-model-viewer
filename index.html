@@ -61,6 +61,18 @@
             document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
             elemento.classList.add('selected');
         }
+        function mudarModelo(elemento, arquivo) {
+            const mv = document.querySelector("#meu-modelo");
+            mv.src = arquivo;
+            
+            if (arquivo === 'Buildings.glb') {
+                mv.setAttribute('scale', '0.005 0.005 0.005'); // Escala de maquete
+                mv.setAttribute('ar-scale', 'fixed');
+            } else {
+                mv.setAttribute('scale', '1 1 1'); // Escala normal para os outros
+                mv.setAttribute('ar-scale', 'auto');
+            }
+        }
     </script>
 
 </body>
