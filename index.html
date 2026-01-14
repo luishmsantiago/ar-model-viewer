@@ -60,42 +60,15 @@
             // Remove destaque dos botões e adiciona no clicado
             document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
             elemento.classList.add('selected');
-        }
-        function mudarModelo(elemento, arquivo) {
-            const mv = document.querySelector("#meu-modelo");
-            mv.src = arquivo;
-
+            
             if (arquivo === 'residential_complex_modern_apartment_building.glb') {
-                // Reduz o tamanho do prédio
-                mv.setAttribute('scale', '0.0005 0.0005 0.0005'); 
-                
-                // LIBERA O ZOOM: permite que a câmera se afaste o quanto for necessário
-                mv.setAttribute('max-field-of-view', 'auto'); 
-                mv.setAttribute('max-camera-orbit', 'auto auto auto');
-                
-                // FOCO: Garante que a câmera foque na base do prédio e não no meio do nada
-                mv.setAttribute('camera-target', '0m 0m 0m');
-
+                mv.setAttribute('scale', '0.0005 0.0005 0.0005'); // Escala de maquete
                 mv.setAttribute('ar-scale', 'auto');
             } else { 
-                // Reseta para os modelos pequenos (Astronauta/Cadeira)
-                mv.setAttribute('scale', '1 1 1'); 
-                
-                // Volta para o zoom padrão para não parecer longe demais
-                mv.setAttribute('max-field-of-view', '45deg'); 
-                mv.setAttribute('max-camera-orbit', 'auto auto auto');
-                
-                mv.setAttribute('camera-target', 'auto auto auto');
+                mv.setAttribute('scale', '1 1 1'); // Escala normal para os outros
                 mv.setAttribute('ar-scale', 'auto');
             }
-
-            // Opcional: Força a câmera a resetar a posição para o usuário não ficar "perdido"
-            mv.cameraOrbit = '0deg 75deg auto';
-
-            document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
-            elemento.classList.add('selected');
         }
-        
     </script>
 
 </body>
