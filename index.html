@@ -62,7 +62,8 @@
             document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
             elemento.classList.add('selected');
             
-            if (arquivo === 'residential_complex_modern_apartment_building.glb') {
+            if (arquivo === 'residential_complex_modern_apartment_building.glb' 
+                || arquivo === 'apartment.glb') {
                 mv.setAttribute('scale', '0.0005 0.0005 0.0005'); // Escala de maquete
                 mv.setAttribute('ar-scale', 'auto');
             } else { 
