@@ -55,28 +55,40 @@
 
     <script>
         function mudarModelo(elemento, arquivo) {
-            const mv = document.querySelector("#meu-modelo");
-            mv.src = arquivo; // Altera o arquivo .glb
-            
-            // Remove destaque dos botões e adiciona no clicado
-            document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
-            elemento.classList.add('selected');
-            
-            if (arquivo === 'residential_complex_modern_apartment_building.glb') {
-                mv.setAttribute('scale', '0.0005 0.0005 0.0005'); // Escala de maquete
-                mv.setAttribute('ar-scale', 'auto');
-            } else { 
-                mv.setAttribute('scale', '1 1 1'); // Escala normal para os outros
-                mv.setAttribute('ar-scale', 'auto');
+        const mv = document.querySelector("#meu-modelo");
+        
+        // 1. Definição das configurações de cada modelo
+        const configuracoes = {
+            'residential_complex_modern_apartment_building.glb': {
+                scale: '0.0005 0.0005 0.0005',
+                arScale: 'fixed', // 'fixed' é melhor para maquetes para não crescerem sozinhas
+                target: '0m 0m 0m'
+            },
+            'apartment.glb': {
+                scale: '0.05 0.05 0.05',
+                arScale: 'auto',
+                target: 'auto auto auto'
+            },
+            'default': {
+                scale: '1 1 1',
+                arScale: 'auto',
+                target: 'auto auto auto'
             }
-            if (arquivo === 'apartment.glb') {
-                mv.setAttribute('scale', '0.05 0.05 0.05'); // Escala de maquete
-                mv.setAttribute('ar-scale', 'auto');
-            } else { 
-                mv.setAttribute('scale', '1 1 1'); // Escala normal para os outros
-                mv.setAttribute('ar-scale', 'auto');
-            }
-        }
+        };
+
+        // 2. Seleciona a configuração do arquivo atual ou a padrão (default)
+        const config = configuracoes[arquivo] || configuracoes['default'];
+
+        // 3. Aplica as mudanças no <model-viewer>
+        mv.src = arquivo;
+        mv.setAttribute('scale', config.scale);
+        mv.setAttribute('ar-scale', config.arScale);
+        mv.setAttribute('camera-target', config.target);
+
+        // 4. Interface (UI): Gerencia a classe 'selected'
+        document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
+        elemento.classList.add('selected');
+    }
     </script>
 
 </body>
