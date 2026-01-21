@@ -51,6 +51,7 @@
         <button onclick="mudarModelo(this, 'Chair.glb')">Cadeira</button>
         <button onclick="mudarModelo(this, 'residential_complex_modern_apartment_building.glb')">Prédio</button>
         <button onclick="mudarModelo(this, 'apartment.glb')">Planta Apartamento</button>
+        <button onclick="mudarModelo(this, 'teste_ap_all_golf_v5.glb')">All Golf</button>
     </div>
 
     <script>
@@ -69,6 +70,12 @@
                 arScale: 'auto',
                 target: 'auto auto auto'
             },
+            'teste_ap_all_golf_v5.glb': {
+                scale: '0.05 0.05 0.05',
+                arScale: 'auto',
+                target: 'auto auto auto',
+                color: [0.08, 0.08, 0.08, 1.0] // Cinza claro (R, G, B, Alpha)
+            },
             'default': {
                 scale: '1 1 1',
                 arScale: 'auto',
@@ -84,6 +91,15 @@
         mv.setAttribute('scale', config.scale);
         mv.setAttribute('ar-scale', config.arScale);
         mv.setAttribute('camera-target', config.target);
+
+        mv.addEventListener('load', () => {
+            if (config.color) {
+                // Isso percorre todos os materiais do modelo e aplica a cor
+                mv.model.materials.forEach(mat => {
+                    mat.pbrMetallicRoughness.setBaseColorFactor(config.color);
+                });
+            }
+        }, { once: true }); // O 'once: true' evita que o código se acumule
 
         // 4. Interface (UI): Gerencia a classe 'selected'
         document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
