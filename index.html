@@ -74,7 +74,7 @@
                 scale: '0.05 0.05 0.05',
                 arScale: 'auto',
                 target: 'auto auto auto',
-                color: [0.08, 0.08, 0.08, 1.0] // Cinza claro (R, G, B, Alpha)
+                //color: [0.08, 0.08, 0.08, 1.0] // Cinza claro (R, G, B, Alpha)
             },
             'default': {
                 scale: '1 1 1',
@@ -92,14 +92,14 @@
         mv.setAttribute('ar-scale', config.arScale);
         mv.setAttribute('camera-target', config.target);
 
-        mv.addEventListener('load', () => {
-            if (config.color) {
-                // Isso percorre todos os materiais do modelo e aplica a cor
-                mv.model.materials.forEach(mat => {
-                    mat.pbrMetallicRoughness.setBaseColorFactor(config.color);
-                });
-            }
-        }, { once: true }); // O 'once: true' evita que o código se acumule
+        // mv.addEventListener('load', () => {
+        //     if (config.color) {
+        //         // Isso percorre todos os materiais do modelo e aplica a cor
+        //         mv.model.materials.forEach(mat => {
+        //             mat.pbrMetallicRoughness.setBaseColorFactor(config.color);
+        //         });
+        //     }
+        // }, { once: true }); // O 'once: true' evita que o código se acumule
 
         // 4. Interface (UI): Gerencia a classe 'selected'
         document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('selected'));
